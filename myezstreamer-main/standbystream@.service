@@ -1,0 +1,11 @@
+[Unit]
+Description=Standby Stream For Stream %I
+[Service]
+Restart=on-failure
+Type=simple
+RestartSec=5
+#User=ezstreamer
+ExecStart=/home/ezstreamer/ezstreamer/scripts/standbystream.sh -s%I
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,16 @@
+http:// {
+        root * /home/ezstreamer/ezstreamer/public
+        encode zstd gzip
+        file_server
+        php_fastcgi unix//var/run/php/php8.1-fpm.sock
+        handle_path /camera* {
+          reverse_proxy * localhost:8081
+        }
+}
+
+:8080 {
+        root * /home/ezstreamer/ezstreamer/database
+        encode zstd gzip
+        file_server
+        php_fastcgi unix//var/run/php/php8.1-fpm.sock
+}

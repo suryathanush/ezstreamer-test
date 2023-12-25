@@ -1,0 +1,87 @@
+<?php
+
+use Illuminate\Contracts\Http\Kernel;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
+
+use App\Models\Stream;
+
+define('LARAVEL_START', microtime(true));
+
+require __DIR__.'/vendor/autoload.php';
+
+$app = require_once __DIR__.'/bootstrap/app.php';
+
+$kernel = $app->make(Kernel::class);
+
+$response = tap($kernel->handle(
+    $request = Request::capture()
+));
+
+$kernel->terminate($request, $response);
+
+$streams = collect(Stream::all())->map(function ($data) {
+	return [
+		"id" => $data['id'],
+		"provider_id" => $data['provider_id'],
+		"stream_name" => $data['stream_name'],
+		"description" => $data['description'],
+		"send_audio" => $data['send_audio'],
+		"input_url" => Crypt::decryptString($data['input_url']),
+		"youtube_url" => Crypt::decryptString($data['youtube_url']),
+		"youtube_backup_url" => Crypt::decryptString($data['youtube_backup_url']),
+		"standby_stream_img" => $data['standby_stream_url'],
+		"youtube_key" => Crypt::decryptString($data['youtube_key'])
+        ];
+});
+
+$merged_streams = array_merge_recursive(...$streams);
+
+if (is_array($merged_streams['input_url'])){
+	$index = count($merged_streams['input_url']);
+	while($index > 1) {
+		$index = --$index;
+		$input_stream = Stream::skip($index)->first()->input_url;
+		$youtube_stream = Stream::skip($index)->first()->youtube_url;
+		$backup_stream = Stream::skip($index)->first()->youtube_backup_url;
+		$standby_stream_img = Stream::skip($index)->first()->standby_stream_img;
+		$youtube_key = Stream::skip($index)->first()->youtube_key;
+		$audio_var = Stream::skip($index)->first()->send_audio;
+		$index = ++$index;
+		echo 'input_stream'.$index. '="' . Crypt::decryptString($input_stream) . "\"\n";
+		echo 'youtube_stream'.$index. '="' . Crypt::decryptString($youtube_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'backup_stream'.$index. '="' . Crypt::decryptString($backup_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'standby_stream_img'.$index.'="'.$standby_stream_img.'"'."\n";
+		echo 'send_audio'.$index."=".$audio_var."\n";
+		$index = --$index;
+		}
+	if ($index = 1) {
+		$input_stream = Stream::first()->input_url;
+		$youtube_stream = Stream::first()->youtube_url;
+		$backup_stream = Stream::first()->youtube_backup_url;
+		$standby_stream_img = Stream::first()->standby_stream_img;
+		$youtube_key = Stream::first()->youtube_key;
+		$audio_var = Stream::first()->send_audio;
+		echo 'input_stream'.$index. '="' . Crypt::decryptString($input_stream) . "\"\n";
+		echo 'youtube_stream'.$index. '="' . Crypt::decryptString($youtube_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'backup_stream'.$index. '="' . Crypt::decryptString($backup_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'send_audio'.$index."=".$audio_var."\n";
+		echo 'standby_stream_img'.$index.'="'.$standby_stream_img.'"'."\n";
+		$index = --$index;
+	}
+} else {
+		$input_stream = Stream::first()->input_url;
+		$youtube_stream = Stream::first()->youtube_url;
+		$backup_stream = Stream::first()->youtube_backup_url;
+		$standby_stream_img = Stream::first()->standby_stream_img;
+		$youtube_key = Stream::first()->youtube_key;
+		$audio_var = Stream::first()->send_audio;
+		echo 'input_stream1="' . Crypt::decryptString($input_stream) . "\"\n";
+		echo 'youtube_stream1="' . Crypt::decryptString($youtube_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'backup_stream1="' . Crypt::decryptString($backup_stream) . "/" . Crypt::decryptString($youtube_key) . "\"\n";
+		echo 'standby_stream_img1="'.$standby_stream_img.'"'."\n";
+		echo 'send_audio1='.$audio_var."\n";
+}
+
+

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#set -x
+source /home/ezstreamer/ezstreamer/.env
+
+cloud_updated_at=$(for i in $(curl -s -H 'Accept: application/json' -H "Authorization: Bearer $CLOUD_API_KEY" $EZ_CLOUD_URL/api/streams | jq '.[].updated_at' | tr -d '"');do 
+date -d "$i" +%s
+done | sort -r | head -n1)
+
+
+local_updated_at=$(date -d "$(grep "updated_at" <(php /home/ezstreamer/ezstreamer/scripts/api/getstreams.php) | cut -d'=' -f2- | sort -t= -k2 -r | head -n1 | tr -d '"') UTC" +"%s")
+
+if [ ! -z $cloud_updated_at ];then
+  if [ $cloud_updated_at -gt $local_updated_at ];then
+    echo -n "cloud"
+  else
+    echo -n "local"
+  fi
+else
+  echo "local"
+fi

@@ -1,0 +1,14 @@
+[Unit]
+Description=Stream %I Service
+[Service]
+Restart=always
+Type=simple
+RestartSec=5
+#User=ezstreamer
+ExecStart=/home/ezstreamer/ezstreamer/scripts/stream.sh -s%I
+ExecStopPost=/bin/sh -c 'if [ "$$EXIT_STATUS" = 1 ]; then systemctl start standbystream@%I.service; fi'
+TimeoutSec=5
+#StandardOutput=null
+[Install]
+WantedBy=multi-user.target
+
