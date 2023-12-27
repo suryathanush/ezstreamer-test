@@ -44,18 +44,18 @@
                 </div>   
                 <div class="col-span-6 md:col-span-3 lg:col-span-4">
                   <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                  <input value="{{ $stream->description }}" type="text" name="description" id="description" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                  <input value="" type="text" name="description" id="description" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="col-span-3">
-                  <label for="youtube_key" class="block text-sm font-medium text-gray-700">YouTube Key</label>
+                  <label for="youtube_key" class="block text-sm font-medium text-gray-700">Stram Key</label>
                   <input value="{{ $stream->youtube_key }}" type="text" name="youtube_key" id="youtube_key" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">            
                 </div>
                 <div class="col-span-6">
-                  <label for="input_url" class="block text-sm font-medium text-gray-700">Input URL</label>
+                  <label for="input_url" class="block text-sm font-medium text-gray-700">Rtsp URL</label>
                   <input value="{{ $stream->input_url }}" type="text" name="input_url" id="input_url" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="col-span-6">
-                  <label for="youtube_url" class="block text-sm font-medium text-gray-700">YouTube URL</label>
+                  <label for="youtube_url" class="block text-sm font-medium text-gray-700">Rtmp URL</label>
                   <input value="{{ $stream->youtube_url }}" type="text" name="youtube_url" id="youtube_url" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
                 <div class="col-span-6">

@@ -42,5 +42,9 @@ Route::middleware([
         Route::get('/cloudtoken', [CloudController::class, 'viewtoken'])->name('view_token');
         Route::post('/cloudtoken', [CloudController::class, 'settoken'])->name('set_token');
 
+        Route::get('/settings', [StreamController::class, 'settings'])->name('settings');
+        Route::get('/about', [StreamController::class, 'about'])->name('about');
+
+        
     });
 

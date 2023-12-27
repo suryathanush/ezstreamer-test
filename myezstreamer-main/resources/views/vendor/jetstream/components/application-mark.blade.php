@@ -1,6 +1,4 @@
-<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
- width="50.000000pt" height="40.000000pt" viewBox="0 0 100.000000 70.000000"
- preserveAspectRatio="xMidYMid meet">
+<img src="{{url('logo/logo.png')}}" alt="" style="    height: 60px!important;">
 
 <g transform="translate(5.000000,75.000000) scale(0.100000,-0.100000)"
 fill="#000000" stroke="none">

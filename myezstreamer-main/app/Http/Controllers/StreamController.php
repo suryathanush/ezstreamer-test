@@ -155,4 +155,18 @@ class StreamController extends Controller
 		session()->flash('success', 'Standby Stream Started');
 		return redirect('/streams');
 	}
+
+
+	public function about(){
+		return view('about');
+
+	}
+
+	public function setting(){
+
+		$user = Auth::user();
+		return view('setting', [
+            'streams' => $user,
+        ]);
+	}
 }

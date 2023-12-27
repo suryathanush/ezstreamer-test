@@ -24,10 +24,8 @@
             <div class="flex content-center justify-center w-full lg:w-5/12 h-24 lg:h-64 border-t lg:border-t-0 lg:border-r lg:border-l lg:rounded-r bg-indigo-50">
             <!-- Logo -->
               <a href="{{ route('login') }}" class="flex items-center justify-center content-center">
-              <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-               width="99.000000pt" height="70.000000pt" viewBox="0 0 99.000000 70.000000"
-               preserveAspectRatio="xMidYMid meet">
-              
+            
+               <img src="{{url('logo/logo.png')}}" alt="" style="width=99.000000pt; height=70.000000pt; padding:30px;">
               <g transform="translate(0.000000,70.000000) scale(0.100000,-0.100000)"
               fill="#000000" stroke="none">
                 <defs>

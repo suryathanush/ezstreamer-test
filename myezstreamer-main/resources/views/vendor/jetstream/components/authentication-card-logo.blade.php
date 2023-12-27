@@ -1,9 +1,10 @@
 <div class="border border-solid pt-4 px-4 pb-3 rounded-xl bg-indigo-50">
     <a href="/">
         {{-- <div style="font-style:italic;margin-bottom:-12px;margin-left:4px;">my</div> --}}
-        <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+       <!--  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
      width="99.000000pt" height="70.000000pt" viewBox="0 0 99.000000 70.000000"
-     preserveAspectRatio="xMidYMid meet">
+     preserveAspectRatio="xMidYMid meet"> -->
+     <img src="{{url('logo/logo.png')}}" alt="" style="width=99.000000pt; height=70.000000pt; ">
     
     <g transform="translate(0.000000,70.000000) scale(0.100000,-0.100000)"
     fill="#000000" stroke="none">
@@ -17,6 +18,6 @@
     -12z"/>
     </g>
     </svg>
-    <div style="font-style:italic;margin-top:-8px;text-align:center;letter-spacing:5px;">streamer</div>
+    
     </a>
 </div>
